@@ -1,0 +1,106 @@
+<div class="d-flex justify-content-center align-items-center1">
+    <div class="border radius shadow col-11 my-3">
+        <div class="d-flex p-3 radius-top border-bottom PanelHeader">
+            <div class="d-flex align-items-center">
+                <h2 class="m-0">Booking History</h2>
+            </div>
+        </div>
+        <div class="pt-3 pb-2 border radius shadow-sm position-relative bg-light m-3">
+            <div class="position-absolute shadow-sm bg-white pe-2 top-0 d-flex py-1 FilterIcon">
+                <mat-icon class="fas fa-filter SmallCaption Font-Icon-Color ps-1" color="primary">search</mat-icon>
+            </div>
+            <div class="d-flex align-items-center px-4">
+                <div>
+                    <mat-radio-group aria-label="Select an option" color="warn" [(ngModel)]="selectedOne">
+                    <mat-radio-button value="email">Email Id</mat-radio-button>
+                    <mat-radio-button value="pnr" class="ps-3">PNR Number</mat-radio-button>
+                </mat-radio-group>
+                </div>
+        
+                <div class="ps-4">
+                    <mat-form-field class="example-form-field" *ngIf="selectedOne === 'email'">
+                        <mat-label>Email Id</mat-label>
+                        <input matInput type="text" [(ngModel)]="emailId" tabindex="1" maxlength="50">
+                    </mat-form-field>
+                    <mat-form-field class="example-form-field" *ngIf="selectedOne === 'pnr'">
+                        <mat-label>PNR #</mat-label>
+                        <input matInput type="text" [(ngModel)]="pnrNumber" tabindex="2" maxlength="8">
+                    </mat-form-field>
+        
+                    <button mat-flat-button color="accent" class="ms-4" (click)="onClick_Apply()">Apply</button>
+                </div>
+            </div>       
+        </div>
+        <div *ngIf="bookings?.length > 0; else noData">
+        <div class="example-container mat-elevation-z8 scrollbarColor">
+            <table mat-table [dataSource]="bookings">
+
+                <ng-container matColumnDef="flightNumber" sticky>
+                    <th mat-header-cell *matHeaderCellDef class="font-size-1rem"> Flight # </th>
+                    <td mat-cell *matCellDef="let element" class="cell-width-150"> {{element.Schedules?.FlightNumber}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="airlineName" sticky>
+                    <th mat-header-cell *matHeaderCellDef class="font-size-1rem"> Airline Name </th>
+                    <td mat-cell *matCellDef="let element" class="cell-width-200"> {{element.Airlines?.AirlineName}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="fromPlace">
+                    <th mat-header-cell *matHeaderCellDef class="font-size-1rem"> From Place </th>
+                    <td mat-cell *matCellDef="let element" class="cell-width-150">{{element.Schedules?.FromPlace}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="toPlace">
+                    <th mat-header-cell *matHeaderCellDef class="font-size-1rem"> To Place </th>
+                    <td mat-cell *matCellDef="let element" class="cell-width-150"> {{element.Schedules?.ToPlace}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="pnrNumber">
+                    <th mat-header-cell *matHeaderCellDef class="font-size-1rem"> PNR Number </th>
+                    <td mat-cell *matCellDef="let element" class="cell-width-150"> {{element.PNRNumber}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="ticketCost">
+                    <th mat-header-cell *matHeaderCellDef class="font-size-1rem"> Ticket Cost </th>
+                    <td mat-cell *matCellDef="let element" class="cell-width-150"> {{element.TicketCost}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="journeyDate">
+                    <th mat-header-cell *matHeaderCellDef class="font-size-1rem"> Journey Date </th>
+                    <td mat-cell *matCellDef="let element" class="cell-width-250">
+                        {{element.DateOfJourney | date : 'MM/dd/yyyy hh:mm' }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="returnJourneyDate">
+                    <th mat-header-cell *matHeaderCellDef class="font-size-1rem"> Return Journey Date </th>
+                    <td mat-cell *matCellDef="let element" class="cell-width-200"> {{element.ReturnDateOfJourney | date : 'MM/dd/yyyy hh:mm'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="isRoundTrip">
+                    <th mat-header-cell *matHeaderCellDef class="font-size-1rem">Round Trip</th>
+                    <td mat-cell *matCellDef="let element" class="cell-width-150">
+                        <mat-icon color="primary">{{ element.IsRoundTrip ? 'check_circle' : 'cancel' }} </mat-icon>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="meal">
+                    <th mat-header-cell *matHeaderCellDef class="font-size-1rem">Meal</th>
+                    <td mat-cell *matCellDef="let element" class="cell-width-150"> {{element.Meal}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="isCancel">
+                    <th mat-header-cell *matHeaderCellDef class="font-size-1rem">IsCancel</th>
+                    <td mat-cell *matCellDef="let element" class="cell-width-150"> 
+                        <mat-icon color="warn">{{ element.IsCancelTicket ? 'check_circle' : 'cancel' }} </mat-icon>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="bookingsColumns; sticky:true" class="TableHeader"></tr>
+                <tr mat-row *matRowDef="let row; columns: bookingsColumns;"></tr>
+            </table>
+        </div>
+        </div>
+        <ng-template #noData>
+            <h2 class="text-danger text-center pt-3">No data found.</h2>
+        </ng-template>        
+    </div>
+</div>

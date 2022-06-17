@@ -1,0 +1,116 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body 
+{ 
+    height: 100%; 
+}
+
+body 
+{ 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    overflow: hidden;
+    background: whitesmoke;
+}
+
+.font-size-12{
+    font-size: 12px;
+}
+
+.font-size-1rem {
+    font-size: 1rem;
+}
+
+.font-bolder {
+    font-weight: bold;
+}
+
+.radius {
+    border-radius: 10px;
+}
+
+.radius-top {
+    border-radius: 10px 10px 0 0;
+}
+
+.SuccessSnackBar {
+    color: #05542f;
+    background: linear-gradient(45deg, #0bfb8c, #85ef85);
+}
+
+.SnackBarFont {
+    font-size: 1rem;
+    text-align: center;
+    font-weight: 500;
+}
+
+.DeleteSnackBar {
+    color: white;
+    background: linear-gradient(45deg, #ef0940, #e33866f0);
+}
+
+.text-ellipse {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    white-space: nowrap;
+}
+
+.mat-table .mat-row.SelectedRow {
+    background: #9fe7ee !important;
+}
+
+.mat-row:nth-child(2n+1){
+    background-color: #dff4fc !important;
+  }
+
+  .mat-row:nth-child(2n+2){
+    background-color: white !important;
+  }
+  
+  
+.TableHeader{
+    background-color: #92d9ef;
+}
+
+.PanelHeader{
+    background: aliceblue;
+}
+.bg-inherit {    
+border-radius: inherit;
+}
+
+.mat-row:hover {
+    /* background: #8ce2eb96 !important; */
+}
+
+
+/* scroll - event */
+.scrollbarColor::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #F5F5F5;
+    border-radius: 10px;
+}
+
+.scrollbarColor::-webkit-scrollbar {
+    width: 5px;
+    height: 10px;
+    background-color: #a8a8a8; 
+    /* #F5F5F5; */
+}
+
+.scrollbarColor::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color:  #0cb5e94a;
+}
+
+.cdk-global-overlay-wrapper, .cdk-overlay-container 
+{ 
+    z-index: 9999!important; 
+} 
+
+/* .modal-backdrop {
+    opacity: 0 !important;
+    position: revert;
+} */

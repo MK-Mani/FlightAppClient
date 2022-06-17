@@ -1,0 +1,26 @@
+.example-container {
+    max-height: 500px;
+    width: 1300px;
+    max-width: 100%;
+    overflow: auto;
+  }
+  
+table {
+    width: 1300px;
+  } 
+  
+.cell-width-150 {
+      min-width: 150px;
+  }
+
+  .cell-width-200 {
+    min-width: 200px;
+}
+
+.cell-width-250 {
+    min-width: 250px;
+}
+
+.FilterIcon {
+    border-radius: 0px 0px 20px 0;
+}

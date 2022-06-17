@@ -1,0 +1,34 @@
+<div class="d-flex flex-column flex-grow-1 h-100">
+  <nav class="navbar navbar-expand-lg navbar-light bg-skyblue">
+    <div class="container-fluid">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <mat-icon class="me-1" mat-fab>flight_takeoff</mat-icon>
+        Flight Booking</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- <span class="navbar-toggler-icon"></span> -->
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav w-100 justify-content-end navbar-nav w-100 justify-content-end pt-3 pb-2 pb-sm-0 pt-sm-0" style="--bs-scroll-height: 100px;">          
+          <li *ngFor="let menu of menuItems" class="nav-item" role="presentation" 
+              routerLinkActive="active">
+              <a class="nav-link menu-text" routerLink="{{menu.RouterLink}}">{{menu.MenuText}}</a>
+          </li>
+        </ul>
+        <div *ngIf="isLogin == true" class="d-flex align-items-center py-1 px-2 border radius shadow-sm">
+          <div class="border-end pe-2 WelcomeUser">
+            <span class="text-muted font-size-12">Welcome,</span>
+            <h5 class="m-0 text-ellipse" title="{{userInfo?.firstName}}">{{userInfo?.firstName}}</h5>
+          </div>
+          <button mat-icon-button color="warn" (click)="logout()">
+            <mat-icon>power_settings_new</mat-icon>
+          </button>
+        </div>
+        
+      </div>
+    </div>
+  </nav>  
+  <div class="h-100 MainContainer scrollbarColor">
+    <router-outlet></router-outlet>
+  </div>
+</div>

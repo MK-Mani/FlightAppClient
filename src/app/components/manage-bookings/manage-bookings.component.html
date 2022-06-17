@@ -1,0 +1,123 @@
+<div class="d-flex justify-content-center align-items-center1">
+    <div class="border radius shadow col-11 my-3">
+        <div class="d-flex p-3 radius-top border-bottom PanelHeader">
+            <div class="d-flex align-items-center">
+                <h2 class="m-0">Manage Bookings</h2>
+            </div>
+        </div>
+        <div *ngIf="bookings?.length > 0; else noData">
+        <div class="example-container mat-elevation-z8 scrollbarColor">
+            <table mat-table [dataSource]="bookings">
+
+                <ng-container matColumnDef="flightNumber" sticky>
+                    <th mat-header-cell *matHeaderCellDef class="font-size-1rem"> Flight # </th>
+                    <td mat-cell *matCellDef="let element" class="cell-width-150"> {{element.Schedules?.FlightNumber}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="airlineName" sticky>
+                    <th mat-header-cell *matHeaderCellDef class="font-size-1rem"> Airline Name </th>
+                    <td mat-cell *matCellDef="let element" class="cell-width-200"> {{element.Airlines?.AirlineName}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="fromPlace">
+                    <th mat-header-cell *matHeaderCellDef class="font-size-1rem"> From Place </th>
+                    <td mat-cell *matCellDef="let element" class="cell-width-150">{{element.Schedules?.FromPlace}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="toPlace">
+                    <th mat-header-cell *matHeaderCellDef class="font-size-1rem"> To Place </th>
+                    <td mat-cell *matCellDef="let element" class="cell-width-150"> {{element.Schedules?.ToPlace}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="pnrNumber">
+                    <th mat-header-cell *matHeaderCellDef class="font-size-1rem"> PNR Number </th>
+                    <td mat-cell *matCellDef="let element" class="cell-width-150"> {{element.PNRNumber}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="ticketCost">
+                    <th mat-header-cell *matHeaderCellDef class="font-size-1rem"> Ticket Cost </th>
+                    <td mat-cell *matCellDef="let element" class="cell-width-150"> {{element.TicketCost}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="journeyDate">
+                    <th mat-header-cell *matHeaderCellDef class="font-size-1rem"> Journey Date </th>
+                    <td mat-cell *matCellDef="let element" class="cell-width-250">
+                        {{element.DateOfJourney | date : 'MM/dd/yyyy hh:mm' }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="returnJourneyDate">
+                    <th mat-header-cell *matHeaderCellDef class="font-size-1rem"> Return Journey Date </th>
+                    <td mat-cell *matCellDef="let element" class="cell-width-200"> {{element.ReturnDateOfJourney | date : 'MM/dd/yyyy hh:mm'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="isRoundTrip">
+                    <th mat-header-cell *matHeaderCellDef class="font-size-1rem">Round Trip</th>
+                    <td mat-cell *matCellDef="let element" class="cell-width-150">
+                        <mat-icon color="primary">{{ element.IsRoundTrip ? 'check_circle' : 'cancel' }} </mat-icon>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="meal">
+                    <th mat-header-cell *matHeaderCellDef class="font-size-1rem">Meal</th>
+                    <td mat-cell *matCellDef="let element" class="cell-width-150"> {{element.Meal}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="isCancel">
+                    <th mat-header-cell *matHeaderCellDef class="font-size-1rem">IsCancel</th>
+                    <td mat-cell *matCellDef="let element" class="cell-width-150"> 
+                        <mat-icon color="warn">{{ element.IsCancelTicket ? 'check_circle' : 'cancel' }} </mat-icon>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="bookingsColumns; sticky:true" class="TableHeader"></tr>
+                <tr mat-row *matRowDef="let row; columns: bookingsColumns;" (click)="rowClick_Booking(row)"
+                    [ngClass]="row?.BookingRecId === selectedBookingRow?.BookingRecId ? 'SelectedRow' : ''"></tr>
+            </table>
+        </div>
+        <div class="py-3 text-center">
+            <button [disabled]="!selectedBookingRow" mat-flat-button color="accent" class="me-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <mat-icon class="pe-2">remove_red_eye</mat-icon> Passenger Details
+            </button>
+            <button mat-flat-button color="warn" [disabled]="isCancelDisabled"
+            (click)="onclick_cancelTicket()">Cancel</button>
+            <button [disabled]="!selectedBookingRow" mat-flat-button color="primary" 
+            class="ms-3" (click)="downloadReport()">
+                <mat-icon class="pe-2">download</mat-icon> Download
+            </button>
+        </div>
+        <div class="p-3">
+            <span class="text-danger">Cancel button is enable only if your date of journey is less than one day.</span>
+        </div>
+        </div>
+        <ng-template #noData>
+            <h2 class="text-danger pt-3">No booking details for this user.</h2>
+        </ng-template>        
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title m-0" id="staticBackdropLabel">Passenger Details</h2>
+          <button type="button" mat-mini-fab data-bs-dismiss="modal" color="warn">
+            <mat-icon color="basic">close</mat-icon>
+        </button>
+        </div>
+        <div class="modal-body">
+            <div class="">
+                <div class="d-flex border PanelHeader text-dark">
+                    <h4 class="text-dark col-4 m-0 font-size-1rem p-2 border-end">Name</h4>
+                    <h4 class="text-dark col-4 m-0 font-size-1rem p-2 border-end">Age</h4>
+                    <h4 class="text-dark col-4 m-0 font-size-1rem p-2">Gender</h4>
+                </div>
+                <div *ngFor="let p of selectedBookingRow?.Passengers" class="border d-flex border-bottom">
+                    <div class="col-4 border-end p-2">{{p.Name}}</div>
+                    <div class="col-4 border-end p-2">{{p.Age}}</div>
+                    <div class="col-4 p-2">{{p.Gender}}</div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>

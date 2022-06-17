@@ -1,0 +1,18 @@
+<h2 class="text-center m-0 text-white py-1 bg-cornflowerBlue radius-top">Login</h2>
+    <div class="text-muted font-size-12 text-center pt-3">Enter your credentials and start journey with us</div>
+    <form [formGroup]="userCredentials" (ngSubmit)="onSubmit_ValidateUser()" class="px-3 pt-3">
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Email Id</mat-label>
+            <input matInput placeholder="Enter your email id" formControlName="emailId" tabindex="1" required>
+            <mat-error *ngIf="checkError('emailId', 'required')">Please enter your email id.</mat-error>
+            <mat-error *ngIf="checkError('emailId', 'pattern')">Please enter valid email id.</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100 pt-1">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Enter your password" formControlName="password" type="password" tabindex="2" required>
+            <mat-error *ngIf="checkError('password', 'required')">Please enter your password.</mat-error>
+        </mat-form-field>
+        <div class="pt-3 text-center">
+            <button type="submit" mat-flat-button color="primary">Sign In</button>  
+        </div>        
+    </form>

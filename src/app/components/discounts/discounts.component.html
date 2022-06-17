@@ -1,0 +1,30 @@
+
+<app-airlines *ngIf="airline == null" [navigateFrom]="'DISCOUNT'" (updateDiscount)="openForm($event)"></app-airlines>
+
+
+    <div class="d-flex justify-content-center align-items-center h-100" *ngIf="airline !== null">
+        <div class="border rounded shadow col-10 col-md-7 col-lg-6 col-xl-4">
+            <div class="d-flex p-3">
+                <h2 class="m-0">Update Discount ({{airline?.airlineName}})</h2>
+            </div>
+            <form [formGroup]="updateDiscountForm" (ngSubmit)="onSubmit_UpdateDiscount()" class="px-3 pb-3">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Discount Code</mat-label>
+                <input matInput placeholder="Enter the discount code" formControlName="discountCode" tabindex="1"
+                maxlength="10">
+                <mat-error *ngIf="checkError()">Please enter the discount code.</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100 pt-1">
+                <mat-label>Discount Amount</mat-label>
+                <input matInput placeholder="Discount Amount" formControlName="discountAmount" tabindex="2"
+                maxlength="5">
+                <mat-error *ngIf="checkError()">Please enter the discount amount.</mat-error>
+            </mat-form-field>
+            <div class="pt-3 text-center">
+                <button type="submit" mat-flat-button color="primary" tabindex="5">Save</button>  
+                <button type="button" mat-flat-button color="warn" class="ms-2"  tabindex="6"
+                    (click)="airline = null">Cancel</button>  
+            </div>        
+        </form>
+        </div>
+    </div>

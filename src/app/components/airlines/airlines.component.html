@@ -1,0 +1,58 @@
+<div class="p-3" *ngIf="hideAirlinesPopup; else popup">
+    <div class="border radius-top">
+    <div class="d-flex justify-content-between p-2 align-items-center bg-inherit PanelHeader">
+        <h2 class="m-0">Airlines</h2>
+        <button mat-flat-button	 color="primary" aria-label="your label" value="Add"
+        (click)="navigateAddAirline()" *ngIf="navigateFrom !== 'DISCOUNT'"> ADD
+            <mat-icon class="ps-1">add_circle</mat-icon>
+        </button>
+    </div>
+    
+<mat-table [dataSource]="airlines" class="mat-elevation-z8"> 
+    <ng-container matColumnDef="airlineName">
+      <mat-header-cell *matHeaderCellDef class="font-size-1rem"> Airline </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.airlineName}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="contactNumber">
+      <mat-header-cell *matHeaderCellDef class="font-size-1rem"> Contact Number </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.contactNumber}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="contactAddress">
+      <mat-header-cell *matHeaderCellDef class="font-size-1rem"> Address </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.contactAddress}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="disCode">
+        <mat-header-cell *matHeaderCellDef class="font-size-1rem"> Discount Code </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.discountCode}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="disCost">
+        <mat-header-cell *matHeaderCellDef class="font-size-1rem"> Discount Amount </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.discountAmount}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="block">
+        <mat-header-cell *matHeaderCellDef class="font-size-1rem"></mat-header-cell>
+        <mat-cell class="font-size-1rem justify-content-end"  *matCellDef="let element"> 
+            <button mat-stroked-button color="warn" title="block airline" *ngIf="navigateFrom !== 'DISCOUNT'" (click)="blockAirlines(element)">Block
+                <mat-icon class="ps-1">block</mat-icon>
+            </button>
+            <button mat-stroked-button color="primary" title="update discount"
+            *ngIf="navigateFrom === 'DISCOUNT'"
+             (click)="redirectToDiscountForm(element)">Upddate
+            <mat-icon class="ps-1">edit</mat-icon></button>
+        </mat-cell>
+      </ng-container>
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="TableHeader"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+   
+</mat-table>
+</div>
+</div>
+<ng-template #popup>
+  <router-outlet></router-outlet>
+</ng-template>

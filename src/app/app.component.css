@@ -1,0 +1,27 @@
+.MainContainer {
+    overflow: auto;
+    scroll-behavior: smooth;
+}
+
+.bg-skyblue{
+    background: linear-gradient(0deg, #8ad9f1, #08b4e9);
+}
+
+.menu-text {
+    color: #0f0785 !important;
+    font-size: 1rem;
+}
+
+.menu-text:hover {
+    color: #565bf1 !important;
+}
+
+.active .menu-text {
+    color: white !important;
+    /* border-radius: 10px;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important; */
+}
+
+.WelcomeUser {
+    max-width: 100px;
+}

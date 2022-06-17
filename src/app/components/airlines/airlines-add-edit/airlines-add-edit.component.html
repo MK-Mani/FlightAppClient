@@ -1,0 +1,35 @@
+<div class="d-flex justify-content-center align-items-center h-100">
+    <div class="border rounded shadow col-10 col-md-7 col-lg-6 col-xl-4">
+        <div class="d-flex p-3">
+            <h2 class="m-0">Add Airline</h2>
+        </div>
+        <form [formGroup]="registerAirline" (ngSubmit)="onSubmit_registerAirline()" class="px-3 pb-3">
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Airline Name</mat-label>
+            <input matInput placeholder="Enter your airline name" formControlName="airlineName" tabindex="1" required>
+            <mat-error *ngIf="checkError('airlineName', 'required')">Please enter your airline name.</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100 pt-1">
+            <mat-label>Airline Logo</mat-label>
+            <input matInput placeholder="airline logo" formControlName="airlineLogo" tabindex="2">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Contact Number</mat-label>
+            <input matInput placeholder="Enter your contact number" formControlName="contactNumber" 
+                tabindex="3" maxlength="10" required>
+            <mat-error *ngIf="checkError('contactNumber', 'required')">Please enter your contact number.</mat-error>
+            <mat-error *ngIf="checkError('contactNumber', 'minlength')">Please enter a valid contact number.</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Contact Address</mat-label>
+            <input matInput placeholder="Enter your contact addres" formControlName="contactAddress" tabindex="4" required>
+            <mat-error *ngIf="checkError('contactAddress', 'required')">Please enter your contact addres.</mat-error>
+        </mat-form-field>
+        <div class="pt-3 text-center">
+            <button type="submit" mat-flat-button color="primary" tabindex="5">Save</button>  
+            <button type="button" mat-flat-button color="warn" class="ms-2"  tabindex="6"
+                (click)="redirecToAirline()">Cancel</button>  
+        </div>        
+    </form>
+    </div>
+</div>

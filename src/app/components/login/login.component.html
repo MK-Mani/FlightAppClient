@@ -1,0 +1,17 @@
+<div class="d-flex justify-content-center align-items-center h-100">
+    <div class="border radius shadow col-10 col-md-7 col-lg-6 col-xl-4">
+        <div *ngIf="!isSignUp; else signUp">
+            <app-sigin-in></app-sigin-in>
+            <div class="px-3 pb-3 text-center">
+                <div class="py-2">
+                    <div class="line-words-middle"><span class="">(OR)</span></div>
+                </div>
+                <button mat-flat-button color="accent" (click)="isSignUp = true">Sign Up</button>
+            </div>
+        </div>
+
+        <ng-template #signUp>
+            <app-sign-up></app-sign-up>
+        </ng-template>
+    </div>
+</div>
