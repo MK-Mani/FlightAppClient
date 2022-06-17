@@ -1,3 +1,6 @@
+First create an angular application and used this src app folder only .
+
+
 # FlightBookingClientApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.1.
